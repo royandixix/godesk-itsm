@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: godesk-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: godesk
+      POSTGRES_USER: godesk_user
+      POSTGRES_PASSWORD: godesk_dev_password
+
+    ports:
+      - "5434:5432"
+
+    volumes:
+      - godesk_postgres_data:/var/lib/postgresql
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U godesk_user -d godesk"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  godesk_postgres_data:
