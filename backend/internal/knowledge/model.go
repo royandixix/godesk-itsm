@@ -58,7 +58,8 @@ type CreateInput struct {
 }
 
 type UpdateInput struct {
-	CategoryID *int64 `json:"category_id"`
+	CategoryID    *int64 `json:"category_id"`
+	ClearCategory bool   `json:"clear_category"`
 
 	Title *string `json:"title"`
 

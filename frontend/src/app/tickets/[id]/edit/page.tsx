@@ -114,8 +114,15 @@ export default function EditTicketPage() {
     return (
       <AppShell>
         <div className="flex min-h-[500px] flex-col items-center justify-center gap-4 px-6 text-center">
-          <p className="font-semibold text-slate-950 dark:text-white">{t("detail.invalidID")}</p>
-          <Link href="/tickets" className="inline-flex h-9 items-center rounded-md border border-slate-200 px-4 text-sm dark:border-slate-800">{t("detail.back")}</Link>
+          <p className="font-semibold text-slate-950 dark:text-white">
+            {t("detail.invalidID")}
+          </p>
+          <Link
+            href="/tickets"
+            className="inline-flex h-9 items-center rounded-md border border-slate-200 px-4 text-sm dark:border-slate-800"
+          >
+            {t("detail.back")}
+          </Link>
         </div>
       </AppShell>
     );

@@ -165,6 +165,7 @@ export default function AppShell({ children }: AppShellProps) {
           {
             label: t("shell.menu.categories"),
             icon: Boxes,
+            href: "/categories",
           },
         ],
       },
@@ -174,7 +175,7 @@ export default function AppShell({ children }: AppShellProps) {
           {
             label: t("shell.menu.knowledgeBase"),
             icon: BookOpen,
-            submenu: true,
+            href: "/knowledge",
           },
           ...(canManage
             ? [
@@ -198,11 +199,12 @@ export default function AppShell({ children }: AppShellProps) {
           {
             label: t("shell.menu.settings"),
             icon: Settings,
-            submenu: true,
+            href: "/settings",
           },
           {
             label: t("shell.menu.helpCenter"),
             icon: CircleHelp,
+            href: "/help",
           },
         ],
       },

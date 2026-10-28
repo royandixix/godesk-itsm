@@ -219,7 +219,9 @@ func (s *Service) Update(
 	categoryID :=
 		current.CategoryID
 
-	if input.CategoryID != nil {
+	if input.ClearCategory {
+		categoryID = nil
+	} else if input.CategoryID != nil {
 		categoryID =
 			input.CategoryID
 	}

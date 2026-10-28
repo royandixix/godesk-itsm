@@ -1,0 +1,52 @@
+.ga-screen,.ga-screen *{box-sizing:border-box}
+.ga-screen{min-height:100dvh;display:grid;place-items:center;padding:28px;background:#030817;color:#f7f8ff}
+.ga-frame{display:grid;grid-template-columns:1.05fr 1fr;width:min(1160px,100%);min-height:690px;overflow:hidden;border:1px solid #27304f;border-radius:22px;background:#080d1f;box-shadow:0 40px 110px #0008}
+.ga-info{display:flex;flex-direction:column;justify-content:space-between;gap:28px;padding:38px 46px;background:radial-gradient(circle at 100% 95%,#272267,transparent 48%),linear-gradient(145deg,#111d41,#0b1430 65%);border-right:1px solid #2a3350}
+.ga-brand{display:flex;align-items:center;gap:12px;color:#fff!important;text-decoration:none!important;width:max-content}
+.ga-logo{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:#fff;color:#111a3a;font-size:23px}
+.ga-brand strong{display:block;font-size:19px;line-height:1.1;letter-spacing:-.5px}
+.ga-brand small{display:block;margin-top:5px;font-size:11px;color:#a7b2d1}
+.ga-label{color:#a59dff;font-size:11px;font-weight:800;letter-spacing:1.4px}
+.ga-story h1{font-size:clamp(32px,3.3vw,48px);line-height:1.15;letter-spacing:-1.6px;font-weight:800;color:#fff;margin:20px 0 15px}
+.ga-story h1 em{font-style:normal;color:#a59aff}
+.ga-story>p{font-size:14px;line-height:1.8;color:#a6b2d1;max-width:420px;margin:0}
+.ga-preview{border:1px solid #344064;border-radius:16px;background:#0c1531;overflow:hidden;margin-top:31px;box-shadow:0 18px 40px #0004}
+.ga-preview-top{padding:15px 18px;color:#aebadc;font-size:11px;border-bottom:1px solid #273455}
+.ga-preview-top span{letter-spacing:3px;color:#8275ff;margin-right:12px}
+.ga-feature{display:flex;align-items:center;gap:14px;margin:0 19px;padding:16px 0;border-bottom:1px solid #273455}
+.ga-feature:last-child{border:0}
+.ga-feature>b{width:37px;height:37px;display:grid;place-items:center;border-radius:10px;background:#262259;color:#b3acff;font-size:11px}
+.ga-feature strong{display:block;color:#fff;font-size:13px}
+.ga-feature small{display:block;color:#99a6c5;margin-top:5px;font-size:11px}
+.ga-info-footer{font-size:11px;color:#8997bc}
+.ga-panel{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:48px clamp(27px,4.5vw,68px);background:#080d1f}
+.ga-panel-label{font-size:11px;font-weight:800;letter-spacing:1.6px;color:#958dff;margin:0 0 30px}
+.ga-form{width:100%;color:#eef2ff}
+.ga-form :is(main,section,div)[class*="min-h-screen"]{min-height:0!important}
+.ga-form :is(main,section,div)[class*="h-screen"]{height:auto!important}
+.ga-form :is(main,section,div)[class*="bg-"]{background:transparent!important}
+.ga-form :is(main,section,div)[class*="shadow"]{box-shadow:none!important}
+.ga-form> :is(main,section,div){width:100%!important;max-width:none!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+.ga-form :is(main,section,div)[class*="max-w-"]{max-width:100%!important}
+.ga-form :is(h1,h2,h3){color:white!important}
+.ga-form label{color:#c5cee5!important;font-weight:600}
+.ga-form :is(input:not([type="checkbox"]),textarea,select){background:#101a32!important;color:#f5f7ff!important;border:1px solid #303c5e!important;border-radius:10px!important;min-height:46px;box-shadow:none!important;padding:10px 14px;max-width:100%}
+.ga-form :is(input,textarea,select):focus{border-color:#746bff!important;outline:0!important;box-shadow:0 0 0 3px #746bff24!important}
+.ga-form input::placeholder{color:#7885a5!important}
+.ga-form form button:not([type="button"]){border-radius:10px!important;min-height:46px;background:#584af0!important;color:#fff!important;border:1px solid #6d62f1!important;font-weight:700!important}
+.ga-form a{color:#aba4ff!important}
+.ga-form :is(p,span)[class*="text-gray"],.ga-form :is(p,span)[class*="text-slate"]{color:#9ca9c9!important}
+.ga-foot{font-size:11px;text-align:center;color:#8792ad;margin:28px 0 0}
+.ga-mobile-brand{display:none}
+@media(max-width:900px){
+.ga-frame{grid-template-columns:1fr;max-width:520px;min-height:0}
+.ga-info{display:none}
+.ga-panel{padding:40px 32px}
+.ga-mobile-brand{display:flex;align-items:center;gap:9px;margin-bottom:26px;font-size:21px;font-weight:800}
+.ga-mobile-brand span{background:white;color:#111a3a;display:grid;place-items:center;width:34px;height:34px;border-radius:9px}
+}
+@media(max-width:520px){
+.ga-screen{display:block;padding:0}
+.ga-frame{border:0;border-radius:0;min-height:100dvh;width:100%}
+.ga-panel{padding:32px 24px;min-height:100dvh}
+}

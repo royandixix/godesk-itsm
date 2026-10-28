@@ -15,6 +15,7 @@ import (
 	"github.com/royandixix/godesk/backend/internal/category"
 	"github.com/royandixix/godesk/backend/internal/config"
 	"github.com/royandixix/godesk/backend/internal/dashboard"
+	"github.com/royandixix/godesk/backend/internal/knowledge"
 	"github.com/royandixix/godesk/backend/internal/middleware"
 	"github.com/royandixix/godesk/backend/internal/notification"
 	"github.com/royandixix/godesk/backend/internal/reports"
@@ -35,6 +36,7 @@ func New(db *pgxpool.Pool, cfg config.Config) (*gin.Engine, error) {
 
 	userRepository := user.NewRepository(db)
 	categoryRepository := category.NewRepository(db)
+	knowledgeRepository := knowledge.NewRepository(db)
 	ticketRepository := ticket.NewRepository(db)
 	attachmentRepository := attachment.NewRepository(db)
 	dashboardRepository := dashboard.NewRepository(db)
@@ -43,6 +45,7 @@ func New(db *pgxpool.Pool, cfg config.Config) (*gin.Engine, error) {
 	slaRepository := sla.NewRepository(db)
 	reportRepository := reports.NewRepository(db)
 
+	knowledgeService := knowledge.NewService(knowledgeRepository)
 	notificationService := notification.NewService(notificationRepository)
 	activityService := activity.NewService(activityRepository, notificationService)
 	authService := auth.NewService(userRepository, tokenManager)
@@ -63,6 +66,7 @@ func New(db *pgxpool.Pool, cfg config.Config) (*gin.Engine, error) {
 
 	authHandler := auth.NewHandler(authService, cfg)
 	categoryHandler := category.NewHandler(categoryRepository)
+	knowledgeHandler := knowledge.NewHandler(knowledgeService)
 	ticketHandler := ticket.NewHandler(ticketService)
 	attachmentHandler := attachment.NewHandler(attachmentService)
 	dashboardHandler := dashboard.NewHandler(dashboardService)
@@ -137,6 +141,21 @@ func New(db *pgxpool.Pool, cfg config.Config) (*gin.Engine, error) {
 	)
 
 	protectedRoutes.GET("/categories", categoryHandler.ListActive)
+
+	categoryAdmin := protectedRoutes.Group("/categories")
+	categoryAdmin.Use(middleware.RequireRoles(user.RoleSuperAdmin, user.RoleManager))
+	categoryAdmin.GET("/all", categoryHandler.ListAll)
+	categoryAdmin.POST("", categoryHandler.Create)
+	categoryAdmin.PATCH("/:id", categoryHandler.Update)
+	categoryAdmin.PATCH("/:id/status", categoryHandler.UpdateStatus)
+	categoryAdmin.DELETE("/:id", categoryHandler.Delete)
+
+	knowledgeRoutes := protectedRoutes.Group("/knowledge")
+	knowledgeRoutes.GET("", knowledgeHandler.List)
+	knowledgeRoutes.GET("/:id", knowledgeHandler.GetByID)
+	knowledgeRoutes.POST("", knowledgeHandler.Create)
+	knowledgeRoutes.PATCH("/:id", knowledgeHandler.Update)
+	knowledgeRoutes.DELETE("/:id", knowledgeHandler.Delete)
 	protectedRoutes.GET("/dashboard", dashboardHandler.Get)
 	protectedRoutes.GET(
 		"/agents",
